@@ -1,22 +1,31 @@
 #include <iostream>
 
-void Lect01_02(int);
-void Lect01_03(int);
-bool Lect01_04(int, int);
-void Lect01_07();
-void Lect01_10(int);
-
+void LectProg01_02(int);
+void LectProg01_03(int);
+bool LectProg01_04();
+void LectProg01_07();
+void LectProg01_10();
+void LectProg02_02();
+void LectProg02_04();
+void LectProg02_07();
+void LectProg02_12();
+void LectProg02_02();
 
 int main()
 {
-	//Lect01_02(3);
-	//Lect01_03(5);
-	//std::cout << Lect01_04(5,24) << std::endl;
-	Lect01_07();
-	//Lect01_10();
+	//LectProg01_02(3);
+	//LectProg01_03(5);
+	//std::cout << LectProg01_04() << std::endl;
+	//LectProg01_07();
+	//LectProg01_10();
+	//LectProg02_02();
+	LectProg02_04();
+	//LectProg02_07();
+	//LectProg02_12();
+	//LectProg02_Deep02();
 }
 
-void Lect01_02(int n) {
+void LectProg01_02(int n) {
 
 	for (int i = 0; i < n; i++)
 	{
@@ -38,7 +47,7 @@ void Lect01_02(int n) {
 
 }
 
-void Lect01_03(int a) {
+void LectProg01_03(int a) {
 
 	for (int i = 0; i < a; i++)
 	{
@@ -76,7 +85,14 @@ void Lect01_03(int a) {
 	}
 }
 
-bool Lect01_04(int n1, int n2) {
+bool LectProg01_04() {
+	int n1, n2;
+
+	std::cout << "Please enter the first number" << std::endl;
+	std::cin >> n1;
+
+	std::cout << "Please enter the Second number" << std::endl;
+	std::cin >> n2;
 
 	if (sqrt(n2) == n1)
 	{
@@ -89,12 +105,97 @@ bool Lect01_04(int n1, int n2) {
 
 }
 
-void Lect01_07()
+void LectProg01_07()
 {
 	char choice;
-	int size;
+	long long size;
+	long long mb;
+	long long kb;
+	long long b;
+
 	std::cout << "Please enter the units of the file size" << std::endl;
 	std::cin >> choice;
+
+	choice = toupper(choice);
+
 	std::cout << "Please enter the size of the file" << std::endl;
 	std::cin >> size;
+
+	std::cout << std::endl;
+
+	switch (choice)
+	{
+	case 'G':
+
+		mb = size * 1024;
+		kb = mb * 1024;
+		b = kb * 1024;
+
+		std::cout << size << " Gigabytes is " << mb << " Megabytes" << std::endl;
+		std::cout << mb << " Megabytes is " << kb << " Kilobytes" << std::endl;
+		std::cout << kb << " Kilobytes is " << b << " Bytes" << std::endl;
+		break;
+
+	case 'M':
+
+		kb = size * 1024;
+		b = kb * 1024;
+
+		std::cout << size << " Megabyte is " << kb << " Kilobytes" << std::endl;
+		std::cout << kb << " Kilobytes is " << b << " Bytes" << std::endl;
+		break;
+
+	case 'K':
+
+		b = size * 1024;
+
+		std::cout << size << " Kilobyte is " << b << " Bytes" << std::endl;
+		break;
+
+	default:
+		std::cout << "Please enter the correct Unit";
+		break;
+	}
 }
+
+void LectProg01_10() {
+	std::string sNum, sName, cName, stateName;
+	int zCode;
+
+	std::cout << "Please enter your Street Number" << std::endl; //If there is a space in the input then replace the space with a -
+	std::cin >> sNum;
+
+	std::cout << "Please enter your Street Name" << std::endl; //If there is a space in the input then replace the space with a -
+	std::cin >> sName;
+
+	std::cout << "Please enter the name of the City you live in" << std::endl; //If there is a space in the input then replace the space with a -
+	std::cin >> cName;
+
+	std::cout << "Please enter the name of the State that you live in" << std::endl; //If there is a space in the input then replace the space with a -
+	std::cin >> stateName;
+
+	std::cout << "Please enter the Zipcode that you live in" << std::endl; //If there is a space in the input then replace the space with a -
+	std::cin >> zCode;
+
+	std::cout << sNum << ", " << sName << ", " << cName << ", " << stateName << ", " << zCode << std::endl;
+}
+
+void LectProg02_02() {
+
+}
+
+void LectProg02_04() {
+	
+	int num, cPostive, cNegative;
+
+	while (num != 0)
+	{
+		
+	}
+}
+
+void LectProg02_07() {}
+
+void LectProg02_12() {}
+
+void LectProg02_02() {}
