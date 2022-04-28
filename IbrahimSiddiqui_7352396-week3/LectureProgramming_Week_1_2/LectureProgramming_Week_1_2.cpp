@@ -9,7 +9,7 @@ void LectProg02_02();
 void LectProg02_04();
 void LectProg02_07();
 void LectProg02_12();
-void LectProg02_02();
+void LectProg02_Deep02();
 
 int main()
 {
@@ -198,4 +198,4 @@ void LectProg02_07() {}
 
 void LectProg02_12() {}
 
-void LectProg02_02() {}
+void LectProg02_Deep02() {}
