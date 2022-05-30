@@ -1,0 +1,6 @@
+﻿  LabProgramming_week_3_4_5.cpp
+F:\CSCI251\Labs\IbrahimSiddiqui_7352396_week5\LabProgramming_week_3_4_5\LabProgramming_week_3_4_5.cpp(22,30): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+F:\CSCI251\Labs\IbrahimSiddiqui_7352396_week5\LabProgramming_week_3_4_5\LabProgramming_week_3_4_5.cpp(395,30): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+  Point.cpp
+  Generating Code...
+  LabProgramming_week_3_4_5.vcxproj -> F:\CSCI251\Labs\IbrahimSiddiqui_7352396_week5\LabProgramming_week_3_4_5\x64\Debug\LabProgramming_week_3_4_5.exe
