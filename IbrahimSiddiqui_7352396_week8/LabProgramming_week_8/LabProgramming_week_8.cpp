@@ -6,7 +6,8 @@
 
 void Lab08_01();
 void Lab08_03();
-void Lab08_09();
+template <typename T>
+void Lab08_09(std::vector<T>& vect);
 void Lab08_12();
 
 
@@ -23,13 +24,16 @@ int main()
 
     std::cout << "Lab08_03" << std::endl;
     Lab08_03();
-    system("Pause");
+    system("pause");
     std::cout << std::endl;
 
-    //std::cout << "Lab08_09" << std::endl;
-    //Lab08_09();
-    //system("Pause");
-    //std::cout << std::endl;
+    std::cout << "Lab08_09" << std::endl;
+    std::vector<int> vect;
+    vect.push_back(10);
+    vect.push_back(20);
+    Lab08_09(vect);
+    system("Pause");
+    std::cout << std::endl;
 
     //std::cout << "Lab08_12" << std::endl;
     //Lab08_12();
@@ -38,7 +42,7 @@ int main()
 
 }
 
-void Lab08_01() 
+void Lab08_01()
 {
 
 }
@@ -60,9 +64,10 @@ void Lab08_03()
     std::cout << std::endl;
 }
 
-void Lab08_09()
+template <typename T>
+void Lab08_09(std::vector<T>& vect)
 {
-
+    vect.pop_back();
 }
 
 void Lab08_12()
@@ -70,7 +75,7 @@ void Lab08_12()
     /*
     * The order would be (14,40) , (17,3) , (20,10)
     * This is because maps order by the first data type whether it be
-    * alphabetically if its a string/char or numerically if its a 
+    * alphabetically if its a string/char or numerically if its a
     * int, double or float.
     */
 }
