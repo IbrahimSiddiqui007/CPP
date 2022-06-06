@@ -1,20 +1,43 @@
-// Assignment03_Procedural.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+
+void print(std::vector<std::vector<char>> &vect);
 
 int main()
 {
-    std::cout << "Hello World!\n";
+
+	std::vector<std::vector<char>> bus
+	{
+		{' ','0','1','2','3'},
+		{' ',' ',' ',' ','D'},
+		{'1','E','E','E','E'},
+		{'2','E','E','E','E'},
+		{'3','E','E','E','E'},
+		{'4','E','E','E','E'},
+		{' ',' ',' ',' ','D'},
+		{'5','E','E','E','E'},
+		{'6','E','E','E','E'},
+		{'7','E','E','E','E'},
+		{'8','E','E','E','E'},
+		{' ',' ',' ',' ','D'}
+	};
+
+	print(bus);
+
+
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+void print(std::vector<std::vector<char>>& vect)
+{
+	for (int row = 0; row < vect.size(); row++)
+	{
+		for (int col = 0; col < vect[row].size(); col++)
+		{
+			std::cout << vect[row][col];
+		}
+	}
+}
+
