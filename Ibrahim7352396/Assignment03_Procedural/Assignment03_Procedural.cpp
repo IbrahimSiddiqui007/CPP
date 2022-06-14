@@ -3,7 +3,7 @@
 #include <vector>
 #include <fstream>
 
-void print(std::vector<std::vector<char>>& Ladies,std::vector<std::vector<char>>& Men);
+void print(std::vector<std::vector<char>>& Ladies, std::vector<std::vector<char>>& Men);
 void stopALadies(std::vector<std::vector<char>>& Ladies);
 
 int main()
@@ -18,7 +18,7 @@ int main()
         {'3','E','E','E','E'},
         {'4','E','E','E','E'},
     };
-    
+
     std::vector<std::vector<char>> Men
     {
         {' ',' ',' ','D','R'},
@@ -29,19 +29,18 @@ int main()
         {' ',' ',' ','D','R'}
     };
 
-    
 
-    print(ladies,Men);
+
     stopALadies(ladies);
-    print(ladies,Men);
+    print(ladies, Men);
 
 
 }
 
 
-void print(std::vector<std::vector<char>>& Ladies,std::vector<std::vector<char>>& Men)
+void print(std::vector<std::vector<char>>& Ladies, std::vector<std::vector<char>>& Men)
 {
-    
+
     for (int row = 0; row < Ladies.size(); row++)
     {
         for (int col = 0; col < Ladies[row].size(); col++)
@@ -65,7 +64,16 @@ void print(std::vector<std::vector<char>>& Ladies,std::vector<std::vector<char>>
 
 void stopALadies(std::vector<std::vector<char>>& Ladies)
 {
-    
+    for (int row = 0; row < Ladies.size(); row++)
+    {
+        for (int col = 0; col < Ladies[row].size(); col++)
+        {
+            if (Ladies[row][col] == 'E')
+            {
+                Ladies[row][col] = 'L';
+            }
+            
+        }
+        std::cout << std::endl;
+    }
 }
-
-
