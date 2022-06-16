@@ -27,13 +27,13 @@ void stopA(std::vector<std::vector<char>>& passenger, std::vector<std::vector<ch
 
     for (int i = 0; i < line.length(); i++)
     {
-        if (line[i] == 'L')
-        {
-            lCount++;
-        }
-        else if (line[i] == 'C')
+        if (line[i] == 'C')
         {
             cCount++;
+        }
+        else if (line[i] == 'L')
+        {
+            lCount++;
         }
         else if (line[i] == 'M')
         {
@@ -41,22 +41,29 @@ void stopA(std::vector<std::vector<char>>& passenger, std::vector<std::vector<ch
         }
     }
 
-    for (int row = 0; row < 6; row++)
+
+    for (int row = 0; row < passenger.size(); row++)
     {
         for (int col = 0; col < passenger[row].size(); col++)
         {
-            if (lCount > 0 && passenger[row][col] == 'E')
+            if (row > 1 && row < 6 && col > 0 && lCount > 0 && passenger[row][col] == 'E')
             {
                 passenger[row][col] = 'L';
                 Stops[row][col] = 'A';
                 lCount--;
 
             }
-            else if (cCount > 0 && passenger[row][col] == 'E')
+            else if (row > 1 && row < 6 && col > 0 && cCount > 0 && passenger[row][col] == 'E')
             {
                 passenger[row][col] = 'C';
                 Stops[row][col] = 'A';
                 cCount--;
+            }
+            else if (row > 6 && row < 11 && col > 0 && mCount > 0 && passenger[row][col] == 'E')
+            {
+                passenger[row][col] = 'M';
+                Stops[row][col] = 'A';
+                mCount--;
             }
         }
         std::cout << std::endl;
@@ -66,7 +73,6 @@ void stopA(std::vector<std::vector<char>>& passenger, std::vector<std::vector<ch
 int main()
 {
     std::fstream stops;
-    stops.open("StopsOn.txt", std::ios::in | std::ios::out);
 
     std::vector<std::vector<char>> passenger
     {
@@ -100,7 +106,9 @@ int main()
         {' ',' ',' ','D','R'}
     };
 
-    stopA(passenger,Stops,stops);
+    stops.open("StopsOn.txt", std::ios::in | std::ios::out);
+
+    /*stopA(passenger,Stops,stops);*/
     print(passenger);
     std::cout << std::endl;
     print(Stops);
