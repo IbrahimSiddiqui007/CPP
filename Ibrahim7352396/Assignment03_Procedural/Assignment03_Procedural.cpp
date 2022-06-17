@@ -4,7 +4,7 @@
 #include <fstream>
 #include <conio.h>
 
-void addToBus(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, int cCount, int mCount, int lCount, char stop)
+void addToBus(std::vector<std::vector<char>>&passenger, std::vector<std::vector<char>>&Stops, int cCount, int mCount, int lCount, char stop)
 {
     for (int row = 0; row < passenger.size(); row++)
     {
@@ -43,7 +43,7 @@ void removeFromBus(std::vector<std::vector<char>>& passenger, std::vector<std::v
                 passenger[row][col] = 'E';
                 Stops[row][col] = 'E';
                 rLCount--;
-        
+
             }
             else if (row > 1 && row < 6 && col > 0 && rCCount > 0 && passenger[row][col] == 'C' && Stops[row][col] == stop)
             {
@@ -61,7 +61,7 @@ void removeFromBus(std::vector<std::vector<char>>& passenger, std::vector<std::v
     }
 }
 
-void reset(std::vector<std::vector<char>>& passenger,std::vector<std::vector<char>>& Stops)
+void reset(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops)
 {
     for (int row = 0; row < passenger.size(); row++)
     {
@@ -73,7 +73,6 @@ void reset(std::vector<std::vector<char>>& passenger,std::vector<std::vector<cha
                 Stops[row][col] = 'E';
             }
         }
-        std::cout << std::endl;
     }
 }
 
@@ -153,7 +152,7 @@ void stopAll(std::vector<std::vector<char>>& passenger, std::vector<std::vector<
             }
         }
     }
-    
+
     for (int row = 0; row < passenger.size(); row++)
     {
         for (int col = 0; col < passenger[row].size(); col++)
@@ -226,7 +225,7 @@ void menu()
         {'8','E','E','E','E'},
         {' ',' ',' ','D','R'}
     };
-    
+
     char choice = 'A';
     std::cout << "Rules" << std::endl;
     std::cout << std::endl;
@@ -235,46 +234,53 @@ void menu()
     std::cout << std::endl;
 
     print(passenger);
-    
+
     std::cout << "L: Ladies" << std::endl << "M: Men or Male Teenagers" << std::endl << "C: Children" << std::endl << "E: Empty seat" << std::endl;
     std::cout << std::endl;
-    
-    while (choice != 'D'){
-    std::cout << "Please enter D to continue" << std::endl;
-    choice = std::getch();
+
+    while (choice != 'D') {
+        std::cout << "Please enter D to continue" << std::endl;
+        choice = toupper(_getch());
     }
-    
+
     std::cout << std::endl;
 
     while (choice != 'Q') {
-        std::cout << "Please select one of the options" << std::endl << "D: to see stops" << std::endl << "Q: to quit" << std::endl << "R: to reset to default plan" << std::endl << "S: To see which passenger is from which stop"<< std::endl;
-        
-        choice = std::getch();
+        std::cout << "Please select one of the options" << std::endl << "D: to see stops" << std::endl << "Q: to quit" << std::endl << "R: to reset to default plan" << std::endl << "S: To see which passenger is from which stop" << std::endl;
+
+        choice = toupper(_getch());
 
         switch (choice) {
-            case 'D':
-                std::cout << std::endl;
-                std::cout << "Stop " << stop << std::endl;
-                std::cout << std::endl;
-                stopAll(passenger, Stops, stopsOn, stopsOff, stop);
-                stop++;
-                print(passenger);
-                std::cout << std::endl;
-                break;
-            case 'Q':
-                choice = 'Q';
-                break;
-            case 'R':
-                stop = 'A';
-                reset(passenger, Stops);
-                print(passenger);
-                break;
-            case 'S':
-                print(Stops);
-                break;
-            default:
-                std::cout << "Please enter again" << std::endl;
-                break;
+        case 'D':
+            if (stop <= 'F')
+            {
+            std::cout << std::endl;
+            std::cout << "Stop " << stop << std::endl;
+            std::cout << std::endl;
+            stopAll(passenger, Stops, stopsOn, stopsOff, stop);
+            stop++;
+            print(passenger);
+            std::cout << std::endl;
+            }
+            break;
+        case 'Q':
+            choice = 'Q';
+            break;
+        case 'R':
+            stop = 'A';
+            stopsOn.clear();
+            stopsOn.seekg(0, std::ios::beg);
+            stopsOff.clear();
+            stopsOff.seekg(0, std::ios::beg);
+            reset(passenger, Stops);
+            print(passenger);
+            break;
+        case 'S':
+            print(Stops);
+            break;
+        default:
+            std::cout << "Please enter again" << std::endl;
+            break;
         }
     }
     std::cout << std::endl;
@@ -286,5 +292,6 @@ int main()
 {
     menu();
 }
+
 
 
