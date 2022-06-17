@@ -3,54 +3,6 @@
 #include <vector>
 #include <fstream>
 
-//bool checkT(std::vector<std::vector<char>>& passenger)
-//{
-//    int count = 0;
-//
-//    for (int row = 0; row < 6; row++)
-//    {
-//        for (int col = 1; col < passenger[row].size(); col++)
-//        {
-//            if (passenger[row][col] == 'C' || passenger[row][col] == 'L')
-//            {
-//                count++;
-//            }
-//        }
-//    }
-//    if (count == 16)
-//    {
-//        return true;
-//    }
-//    else
-//    {
-//        return false;
-//    }
-//}
-
-//bool checkB(std::vector<std::vector<char>>& passenger)
-//{
-//    int count = 0;
-//
-//    for (int row = 0; row < 6; row++)
-//    {
-//        for (int col = 1; col < passenger[row].size(); col++)
-//        {
-//            if (passenger[row][col] == 'C' || passenger[row][col] == 'L')
-//            {
-//                count++;
-//            }
-//        }
-//    }
-//    if (count == 16)
-//    {
-//        return true;
-//    }
-//    else
-//    {
-//        return false;
-//    }
-//}
-
 void addToBus(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, int cCount, int mCount, int lCount, char stop)
 {
     for (int row = 0; row < passenger.size(); row++)
