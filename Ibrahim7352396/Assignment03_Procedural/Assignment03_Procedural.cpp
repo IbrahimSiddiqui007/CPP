@@ -265,6 +265,7 @@ void menu()
                 choice = 'Q';
                 break;
             case 'R':
+                stop = 'A';
                 reset(passenger, Stops);
                 print(passenger);
                 break;
