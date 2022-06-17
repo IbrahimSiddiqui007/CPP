@@ -3,6 +3,112 @@
 #include <vector>
 #include <fstream>
 
+bool checkT(std::vector<std::vector<char>>& passenger)
+{
+    int count = 0;
+
+    for (int row = 0; row < 6; row++)
+    {
+        for (int col = 1; col < passenger[row].size(); col++)
+        {
+            if (passenger[row][col] == 'C' || passenger[row][col] == 'L')
+            {
+                count++;
+            }
+        }
+    }
+    if (count == 16)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool checkB(std::vector<std::vector<char>>& passenger)
+{
+    int count = 0;
+
+    for (int row = 0; row < 6; row++)
+    {
+        for (int col = 1; col < passenger[row].size(); col++)
+        {
+            if (passenger[row][col] == 'C' || passenger[row][col] == 'L')
+            {
+                count++;
+            }
+        }
+    }
+    if (count == 16)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void addToBus(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, int cCount, int mCount, int lCount, char stop)
+{
+    for (int row = 0; row < passenger.size(); row++)
+    {
+        for (int col = 0; col < passenger[row].size(); col++)
+        {
+            if (row > 1 && row < 6 && col > 0 && lCount > 0 && passenger[row][col] == 'E')
+            {
+                passenger[row][col] = 'L';
+                Stops[row][col] = stop;
+                lCount--;
+
+            }
+            else if (row > 1 && row < 6 && col > 0 && cCount > 0 && passenger[row][col] == 'E')
+            {
+                passenger[row][col] = 'C';
+                Stops[row][col] = stop;
+                cCount--;
+            }
+            else if (row > 6 && row < 11 && col > 0 && mCount > 0 && passenger[row][col] == 'E')
+            {
+                passenger[row][col] = 'M';
+                Stops[row][col] = stop;
+                mCount--;
+            }
+        }
+    }
+}
+
+void removeFromBus(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, int rCCount, int rMCount, int rLCount, char stop)
+{
+    for (int row = 0; row < passenger.size(); row++)
+    {
+        for (int col = 0; col < passenger[row].size(); col++)
+        {
+            if (row > 1 && row < 6 && col > 0 && rLCount > 0 && passenger[row][col] == 'L' && Stops[row][col] == stop)
+            {
+                passenger[row][col] = 'E';
+                Stops[row][col] = 'E';
+                rLCount--;
+        
+            }
+            else if (row > 1 && row < 6 && col > 0 && rCCount > 0 && passenger[row][col] == 'C' && Stops[row][col] == stop)
+            {
+                passenger[row][col] = 'E';
+                Stops[row][col] = 'E';
+                rCCount--;
+            }
+            else if (row > 6 && row < 11 && col > 0 && rMCount > 0 && passenger[row][col] == 'M' && Stops[row][col] == stop)
+            {
+                passenger[row][col] = 'E';
+                Stops[row][col] = 'E';
+                rMCount--;
+            }
+        }
+    }
+}
+
 void print(std::vector<std::vector<char>>& passenger)
 {
 
@@ -16,63 +122,377 @@ void print(std::vector<std::vector<char>>& passenger)
     }
 }
 
-void stopA(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, std::fstream& stops)
+//void stopA(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, std::fstream& stopsOn, char stop)
+//{
+//    std::string line = "";
+//    int mCount = 0;
+//    int lCount = 0;
+//    int cCount = 0;
+//
+//    std::getline(stopsOn, line);
+//
+//    for (int i = 0; i < line.length(); i++)
+//    {
+//        if (line[i] == 'C')
+//        {
+//            cCount++;
+//        }
+//        else if (line[i] == 'L')
+//        {
+//            lCount++;
+//        }
+//        else if (line[i] == 'M')
+//        {
+//            mCount++;
+//        }
+//    }
+//
+//    addToBus(passenger,Stops,cCount,mCount,lCount,stop);
+//
+//
+//}
+//
+//void stopB(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, std::fstream& stopsOn, std::fstream& stopsOff)
+//{
+//    char stop = 'A';
+//
+//    int mCount = 0;
+//    int lCount = 0;
+//    int cCount = 0;
+//
+//    int rMCount = 0;
+//    int rLCount = 0;
+//    int rCCount = 0;
+//
+//    int count = 0;
+//
+//    std::string lineOn = "";
+//    std::string lineOff = "";
+//
+//    std::getline(stopsOn, lineOn);
+//
+//    for (int i = 0; i < lineOn.length(); i++)
+//    {
+//        if (lineOn[i] == 'C')
+//        {
+//            cCount++;
+//        }
+//        else if (lineOn[i] == 'L')
+//        {
+//            lCount++;
+//        }
+//        else if (lineOn[i] == 'M')
+//        {
+//            mCount++;
+//        }
+//    }
+//
+//    std::getline(stopsOff, lineOff,',');
+//
+//    for (int i = 0; i < lineOff.length(); i++)
+//    {
+//        if (lineOff[i] == 'C')
+//        {
+//            rCCount++;
+//        }
+//        else if (lineOff[i] == 'L')
+//        {
+//            rLCount++;
+//        }
+//        else if (lineOff[i] == 'M')
+//        {
+//            rMCount++;
+//        }
+//    }
+//    removeFromBus(passenger, Stops, rCCount, rMCount, rLCount, 'A');
+//
+//    addToBus(passenger, Stops, cCount, mCount, lCount, 'B');
+//}
+//
+//void stopC(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, std::fstream& stopsOn, std::fstream& stopsOff)
+//{
+//    char stop = 'A';
+//
+//    int mCount = 0;
+//    int lCount = 0;
+//    int cCount = 0;
+//
+//    int rMCount = 0;
+//    int rLCount = 0;
+//    int rCCount = 0;
+//
+//    int count = 0;
+//
+//    std::string lineOn = "";
+//    std::string lineOff = "";
+//
+//    std::getline(stopsOn, lineOn);
+//    for (int i = 0; i < lineOn.length(); i++)
+//    {
+//        if (lineOn[i] == 'C')
+//        {
+//            cCount++;
+//        }
+//        else if (lineOn[i] == 'L')
+//        {
+//            lCount++;
+//        }
+//        else if (lineOn[i] == 'M')
+//        {
+//            mCount++;
+//        }
+//    }
+//
+//    while (std::getline(stopsOff, lineOff, ','))
+//    {
+//        int rMCount = 0;
+//        int rLCount = 0;
+//        int rCCount = 0;
+//
+//        for (int i = 0; i < lineOff.length(); i++)
+//        {
+//            if (lineOff[i] == 'C')
+//            {
+//                rCCount++;
+//
+//            }
+//            else if (lineOff[i] == 'L')
+//            {
+//                rLCount++;
+//
+//
+//            }
+//            else if (lineOff[i] == 'M')
+//            {
+//                rMCount++;
+//
+//            }
+//        }
+//        removeFromBus(passenger, Stops, rCCount, rMCount, rLCount, stop);
+//        stop++;
+//    }
+//    
+//
+//    addToBus(passenger, Stops, cCount, mCount, lCount, 'C');
+//}
+//
+//void stopD(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, std::fstream& stopsOn, std::fstream& stopsOff)
+//{
+//    char stop = 'A';
+//
+//    int mCount = 0;
+//    int lCount = 0;
+//    int cCount = 0;
+//
+//    int rMCount = 0;
+//    int rLCount = 0;
+//    int rCCount = 0;
+//
+//    int count = 0;
+//
+//    std::string lineOn = "";
+//    std::string lineOff = "";
+//
+//    std::getline(stopsOn, lineOn);
+//
+//    for (int i = 0; i < lineOn.length(); i++)
+//    {
+//        if (lineOn[i] == 'C')
+//        {
+//            cCount++;
+//        }
+//        else if (lineOn[i] == 'L')
+//        {
+//            lCount++;
+//        }
+//        else if (lineOn[i] == 'M')
+//        {
+//            mCount++;
+//        }
+//    }
+//
+//    while (std::getline(stopsOff, lineOff, ','))
+//    {
+//        int rMCount = 0;
+//        int rLCount = 0;
+//        int rCCount = 0;
+//
+//        for (int i = 0; i < lineOff.length(); i++)
+//        {
+//            if (lineOff[i] == 'C')
+//            {
+//                rCCount++;
+//
+//            }
+//            else if (lineOff[i] == 'L')
+//            {
+//                rLCount++;
+//
+//
+//            }
+//            else if (lineOff[i] == 'M')
+//            {
+//                rMCount++;
+//
+//            }
+//        }
+//        removeFromBus(passenger, Stops, rCCount, rMCount, rLCount, stop);
+//        stop++;
+//
+//    }
+//    addToBus(passenger, Stops, cCount, mCount, lCount, 'D');
+//}
+
+//void stopE(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, std::fstream& stopsOn, std::fstream& stopsOff)
+//{
+//    char stop = 'A';
+//
+//    int mCount = 0;
+//    int lCount = 0;
+//    int cCount = 0;
+//
+//    int rMCount = 0;
+//    int rLCount = 0;
+//    int rCCount = 0;
+//
+//    int count = 0;
+//
+//    std::string lineOn = "";
+//    std::string lineOff = "";
+//
+//    std::getline(stopsOn, lineOn);
+//
+//    for (int i = 0; i < lineOn.length(); i++)
+//    {
+//        if (lineOn[i] == 'C')
+//        {
+//            cCount++;
+//        }
+//        else if (lineOn[i] == 'L')
+//        {
+//            lCount++;
+//        }
+//        else if (lineOn[i] == 'M')
+//        {
+//            mCount++;
+//        }
+//    }
+//
+//    while (std::getline(stopsOff, lineOff, ','))
+//    {
+//        int rMCount = 0;
+//        int rLCount = 0;
+//        int rCCount = 0;
+//
+//        for (int i = 0; i < lineOff.length(); i++)
+//        {
+//            if (lineOff[i] == 'C')
+//            {
+//                rCCount++;
+//
+//            }
+//            else if (lineOff[i] == 'L')
+//            {
+//                rLCount++;
+//
+//
+//            }
+//            else if (lineOff[i] == 'M')
+//            {
+//                rMCount++;
+//
+//            }
+//        }
+//        removeFromBus(passenger, Stops, rCCount, rMCount, rLCount, stop);
+//        stop++;
+//
+//    }
+//    addToBus(passenger, Stops, cCount, mCount, lCount, 'E');
+//}
+
+void stopAll(std::vector<std::vector<char>>& passenger, std::vector<std::vector<char>>& Stops, std::fstream& stopsOn, std::fstream& stopsOff, char stop)
 {
-    std::string line = "";
+    char rStop = 'A';
+
     int mCount = 0;
     int lCount = 0;
     int cCount = 0;
 
-    std::getline(stops, line);
+    int rMCount = 0;
+    int rLCount = 0;
+    int rCCount = 0;
 
-    for (int i = 0; i < line.length(); i++)
+    int count = 0;
+
+    std::string lineOn = "";
+    std::string lineOff = "";
+
+    std::getline(stopsOn, lineOn);
+
+    for (int i = 0; i < lineOn.length(); i++)
     {
-        if (line[i] == 'C')
+        if (lineOn[i] == 'C')
         {
             cCount++;
         }
-        else if (line[i] == 'L')
+        else if (lineOn[i] == 'L')
         {
             lCount++;
         }
-        else if (line[i] == 'M')
+        else if (lineOn[i] == 'M')
         {
             mCount++;
         }
     }
 
-
-    for (int row = 0; row < passenger.size(); row++)
+    if (stop != 'A')
     {
-        for (int col = 0; col < passenger[row].size(); col++)
+        while (std::getline(stopsOff, lineOff, ','))
         {
-            if (row > 1 && row < 6 && col > 0 && lCount > 0 && passenger[row][col] == 'E')
-            {
-                passenger[row][col] = 'L';
-                Stops[row][col] = 'A';
-                lCount--;
+            int rMCount = 0;
+            int rLCount = 0;
+            int rCCount = 0;
 
-            }
-            else if (row > 1 && row < 6 && col > 0 && cCount > 0 && passenger[row][col] == 'E')
+            for (int i = 0; i < lineOff.length(); i++)
             {
-                passenger[row][col] = 'C';
-                Stops[row][col] = 'A';
-                cCount--;
+                if (lineOff[i] == 'C')
+                {
+                    rCCount++;
+
+                }
+                else if (lineOff[i] == 'L')
+                {
+                    rLCount++;
+
+
+                }
+                else if (lineOff[i] == 'M')
+                {
+                    rMCount++;
+
+                }
             }
-            else if (row > 6 && row < 11 && col > 0 && mCount > 0 && passenger[row][col] == 'E')
-            {
-                passenger[row][col] = 'M';
-                Stops[row][col] = 'A';
-                mCount--;
-            }
+            removeFromBus(passenger, Stops, rCCount, rMCount, rLCount, rStop);
+            rStop++;
+            std::cout << rStop << std::endl;
         }
-        std::cout << std::endl;
     }
+    
+    if (checkT )
+
+    addToBus(passenger, Stops, cCount, mCount, lCount, stop);
+
 }
 
 int main()
 {
-    std::fstream stops;
+    char stop = 'A';
+
+    std::fstream stopsOn;
+    std::fstream stopsOff;
+
+    stopsOn.open("StopsOn.txt", std::ios::in | std::ios::out);
+    stopsOff.open("StopsOff.txt", std::ios::in | std::ios::out);
 
     std::vector<std::vector<char>> passenger
     {
@@ -106,14 +526,59 @@ int main()
         {' ',' ',' ','D','R'}
     };
 
-    stops.open("StopsOn.txt", std::ios::in | std::ios::out);
 
-    /*stopA(passenger,Stops,stops);*/
+
+    /*stopAll(passenger, Stops, stopsOn, stopsOff, stop);
     print(passenger);
-    std::cout << std::endl;
     print(Stops);
 
-    stops.close();
+    std::cout << stop << std::endl;
+    stop++;
+    std::cout << stop << std::endl;
+
+    stopAll(passenger, Stops, stopsOn, stopsOff, stop);
+    print(passenger);
+    print(Stops);*/
+
+    int count = 0;
+
+    while (count < 3)
+    {
+        stopAll(passenger, Stops, stopsOn, stopsOff, stop);
+        print(passenger);
+        print(Stops);
+        stop++;
+        count++;
+    }
+   /* stopA(passenger,Stops,stopsOn,'A');
+    print(passenger);
+    print(Stops);
+
+    std::cout << std::endl;
+
+    stopB(passenger, Stops, stopsOn, stopsOff);
+    print(passenger);
+    print(Stops);
+
+    std::cout << std::endl;
+
+    stopC(passenger, Stops, stopsOn, stopsOff);
+    print(passenger);
+    print(Stops);
+
+    std::cout << std::endl;
+
+    stopD(passenger, Stops, stopsOn, stopsOff);
+    print(passenger);
+    print(Stops);
+
+    std::cout << std::endl;
+
+    stopE(passenger, Stops, stopsOn, stopsOff);
+    print(passenger);
+    print(Stops);*/
+
+    stopsOn.close();
 }
 
 
