@@ -4,6 +4,16 @@
 #include <fstream>
 #include <conio.h>
 
+void rff(std::vector<std::vector<char>>& passenger, std::fstream& output)
+{
+    std::string line = "";
+
+    while (std::getline(output, line))
+    {
+        std::cout << line << std::endl;
+    }
+}
+
 void addToBus(std::vector<std::vector<char>>&passenger, std::vector<std::vector<char>>&Stops, int cCount, int mCount, int lCount, char stop)
 {
     for (int row = 0; row < passenger.size(); row++)
@@ -76,8 +86,26 @@ void reset(std::vector<std::vector<char>>& passenger, std::vector<std::vector<ch
     }
 }
 
+void printNwrite(std::vector<std::vector<char>>& passenger,std::fstream& input)
+{
+
+    for (int row = 0; row < passenger.size(); row++)
+    {
+        for (int col = 0; col < passenger[row].size(); col++)
+        {
+            std::cout << passenger[row][col] << "  ";
+            input << passenger[row][col] << "  ";
+
+        }
+        std::cout << std::endl;
+        input <<std::endl;
+    }
+    input << std::endl;
+
+}
 void print(std::vector<std::vector<char>>& passenger)
 {
+
     for (int row = 0; row < passenger.size(); row++)
     {
         for (int col = 0; col < passenger[row].size(); col++)
@@ -190,6 +218,11 @@ void menu()
 
     std::fstream stopsOn;
     std::fstream stopsOff;
+    std::fstream input;
+    std::fstream output;
+
+    input.open("Seat.txt", std::ios::out);
+    output.open("Seat.txt",  std::ios::in);
 
     stopsOn.open("StopsOn.txt", std::ios::in | std::ios::out);
     stopsOff.open("StopsOff.txt", std::ios::in | std::ios::out);
@@ -233,7 +266,7 @@ void menu()
     std::cout << "This Vector shows who is on the bus" << std::endl;
     std::cout << std::endl;
 
-    print(passenger);
+    printNwrite(passenger, input);
 
     std::cout << "L: Ladies" << std::endl << "M: Men or Male Teenagers" << std::endl << "C: Children" << std::endl << "E: Empty seat" << std::endl;
     std::cout << std::endl;
@@ -246,7 +279,8 @@ void menu()
     std::cout << std::endl;
 
     while (choice != 'Q') {
-        std::cout << "Please select one of the options" << std::endl << "D: to see stops" << std::endl << "Q: to quit" << std::endl << "R: to reset to default plan" << std::endl << "S: To see which passenger is from which stop" << std::endl;
+        std::cout << "Please select one of the options" << std::endl << "D: to see stops" << std::endl << "Q: to quit" << std::endl << "R: to reset to default plan" << std::endl << "S: To see which passenger is from which stop" << std::endl
+            << "A. Print Seating plan from file" << std::endl;
 
         choice = toupper(_getch());
 
@@ -259,7 +293,9 @@ void menu()
             std::cout << std::endl;
             stopAll(passenger, Stops, stopsOn, stopsOff, stop);
             stop++;
-            print(passenger);
+            printNwrite(passenger, input);
+            input << "Stop " << stop << std::endl;
+            input << std::endl;
             std::cout << std::endl;
             }
             break;
@@ -274,9 +310,13 @@ void menu()
             stopsOff.seekg(0, std::ios::beg);
             reset(passenger, Stops);
             print(passenger);
+            input << std::endl;
             break;
         case 'S':
             print(Stops);
+            break;
+        case 'A':
+            rff(passenger, output);
             break;
         default:
             std::cout << "Please enter again" << std::endl;
@@ -290,7 +330,9 @@ void menu()
 
 int main()
 {
+
     menu();
+
 }
 
 
