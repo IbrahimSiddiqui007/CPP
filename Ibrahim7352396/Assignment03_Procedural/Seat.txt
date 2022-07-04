@@ -1,0 +1,28 @@
+   A  B  C  D  
+         D  R  
+1  E  E  E  E  
+2  E  E  E  E  
+3  E  E  E  E  
+4  E  E  E  E  
+         D  R  
+5  E  E  E  E  
+6  E  E  E  E  
+7  E  E  E  E  
+8  E  E  E  E  
+         D  R  
+
+   A  B  C  D  
+         D  R  
+1  L  L  L  E  
+2  E  E  E  E  
+3  E  E  E  E  
+4  E  E  E  E  
+         D  R  
+5  M  M  M  M  
+6  M  E  E  E  
+7  E  E  E  E  
+8  E  E  E  E  
+         D  R  
+
+Stop B
+
