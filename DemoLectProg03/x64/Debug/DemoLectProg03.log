@@ -1,3 +1,0 @@
-﻿  DemoLectProg03.cpp
-DemoLectProg03.obj : error LNK2019: unresolved external symbol "public: __cdecl Sample::Sample(int)" (??0Sample@@QEAA@H@Z) referenced in function "void __cdecl LectPrg03_05(void)" (?LectPrg03_05@@YAXXZ)
-D:\##000LectPrepSpring2022\02 CSCI251\02 LectPrep\wk04\moved2week03\DemoLectProg03\x64\Debug\DemoLectProg03.exe : fatal error LNK1120: 1 unresolved externals
